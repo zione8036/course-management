@@ -1,6 +1,6 @@
 # Course Management System
 
-Welcome to the Course Management System! This project helps you manage courses, students, and instructors efficiently. Follow the simple steps below to set up and run the project.
+Welcome to the Course Management System! Follow the simple steps below to set up and run the project.
 
 ## Step 1: Create a Database
 
