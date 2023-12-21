@@ -29,6 +29,19 @@ const Course = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    department: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    archive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
   },
   {
     timestamps: true,
@@ -50,11 +63,12 @@ Course.updateWithAuditing = async function (id, data) {
 
   for (const field of changedFields) {
     if (course[field] !== data[field]) {
+      const oldValue = course[field].toString();
       await AuditLog.create({
         columnId: id,
         table: "course",
         changedField: field,
-        oldValue: course[field],
+        oldValue,
         newValue: data[field],
       });
     }
