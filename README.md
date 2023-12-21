@@ -6,7 +6,7 @@ Welcome to the Course Management System! This project helps you manage courses, 
 
 1.1 Open your preferred database management tool.
 
-1.2 Create a new database named "course-management."
+1.2 Create a new database named "course-management"
 
 1.3 Import the SQL file located in the "database" folder into your newly created database. This file contains the necessary tables and initial data.
 
