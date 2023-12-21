@@ -37,14 +37,6 @@ const AuditCourses = () => {
 
   const columns = [
     {
-      field: "table",
-      headerName: "Table",
-      sortable: true,
-      width: 250,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
       field: "changedField",
       headerName: "Changed Field",
       sortable: true,
@@ -56,7 +48,7 @@ const AuditCourses = () => {
     {
       field: "newValue",
       headerName: "New Value",
-      width: 230,
+      width: 350,
       sortable: true,
       headerAlign: "center",
       align: "center",
@@ -64,7 +56,7 @@ const AuditCourses = () => {
     {
       field: "oldValue",
       headerName: "Old Value",
-      width: 250,
+      width: 350,
       headerAlign: "center",
       align: "center",
     },

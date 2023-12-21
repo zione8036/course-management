@@ -62,19 +62,59 @@ Course.updateWithAuditing = async function (id, data) {
   const changedFields = Object.keys(data);
 
   for (const field of changedFields) {
-    if (course[field] !== data[field]) {
-      const oldValue = course[field].toString();
-      await AuditLog.create({
-        columnId: id,
-        table: "course",
-        changedField: field,
-        oldValue,
-        newValue: data[field],
-      });
+    if (field === "dateModified" || field === "dateCreated") {
+      continue;
+    }
+
+    let oldValue = course[field].toString();
+    let newValue = data[field];
+    if (field === "startDate" || field === "endDate") {
+      const formattedOldValue = formatDate(course[field]);
+      const formattedNewValue = formatDate(data[field]);
+
+      if (formattedOldValue !== formattedNewValue) {
+        oldValue = formattedOldValue;
+        newValue = formattedNewValue;
+
+        await AuditLog.create({
+          columnId: id,
+          table: "course",
+          changedField: field,
+          oldValue,
+          newValue,
+        });
+      }
+    } else {
+      // For other fields
+      if (course[field] !== data[field]) {
+        await AuditLog.create({
+          columnId: id,
+          table: "course",
+          changedField: field,
+          oldValue,
+          newValue,
+        });
+      }
     }
   }
 
   await course.update(data);
 };
+
+function formatDate(date) {
+  if (!date) return "N/A";
+
+  const formattedDate = new Date(date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: false,
+  };
+  return formattedDate.toLocaleDateString("en-US", options);
+}
 
 module.exports = Course;

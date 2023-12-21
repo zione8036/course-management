@@ -2,6 +2,7 @@ import EventIcon from "@mui/icons-material/Event";
 import React, { lazy } from "react";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import { Navigate } from "react-router-dom";
 const Course = lazy(() => import("./pages/course/Course"));
 const ArchiveCourses = lazy(() => import("./pages/course/ArchiveCourses"));
 const CourseAdd = lazy(() => import("./pages/course/CourseAdd"));
@@ -33,5 +34,9 @@ export const routes = [
   {
     path: "/course/edit/:id",
     element: <CourseEdit />,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/course" />,
   },
 ];
